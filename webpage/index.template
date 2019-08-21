@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <title>Hello Kubic!</title>
+  </head>
+  <body>
+    <section>
+      <div class="image">
+	<a href="https://kubernetes.io"><img src="Kubernetes-Logo.png"/></a>
+      </div>
+      <div class="content">
+	<div id="message">
+	  {{.Message}}
+	</div>
+	<div id="info">
+	  <table>
+	    <tr>
+	      <td>
+		<div class="image">
+		  <a href="https://kubic.opensuse.org"><img src="openSUSE-Kubic-Logo.png"/></a>
+		</div>
+	      </td>
+	      <td width="33%">
+		&nbsp;
+	      </td>
+	      <td>
+		<table>
+		  <tr>
+		    <th>Pod:</th>
+		    <td>{{.Hostname}}</td>
+		  </tr>
+		  <tr>
+		    <th>Node:</th>
+		    <td>{{.Platform}} ({{.Release}})</td>
+		  </tr>
+		  <tr>
+		    <th>Time:</th>
+		    <td>{{.Time}}</td>
+		  </tr>
+		  {{if .NodeName}}
+		  <tr>
+		    <th>Node Name:</th>
+		    <td>{{.NodeName}}</td>
+		  </tr>
+		  {{end}}
+		  {{if .PodName}}
+		  <tr>
+		    <th>Pod Name:</th>
+		    <td>{{.PodName}}</td>
+		  </tr>
+		  {{end}}
+		  {{if .PodNamespace}}
+		  <tr>
+		    <th>Pod Namespace:</th>
+		    <td>{{.PodNamespace}}</td>
+		  </tr>
+		  {{end}}
+		  {{if .PodIP}}
+		  <tr>
+		    <th>Pod IP:</th>
+		    <td>{{.PodIP}}</td>
+		  </tr>
+		  {{end}}
+		  {{if .PodServiceAccount}}
+		  <tr>
+		    <th>Pod Service Account:</th>
+		    <td>{{.PodServiceAccount}}</td>
+		  </tr>
+		  {{end}}
+		</table>
+	      </td>
+	    </tr>
+	  </table>
+	</div>
+      </div>
+    </section>
+    <style>
+      body {
+        text-align: center;
+        background: #303030;
+        color: #f2f2f2;
+      }
+      div.image {
+        margin: 40px 0;
+      }
+      div.content {
+        color: #f2f2f2
+      }
+      .content #message {
+        margin: 10px 0 50px 0;
+        padding: 30px 0;
+        font-size: 32pt;
+        background-color: #505050;
+        border-top: 2px solid #909090;
+        border-bottom: 2px solid #909090;
+      }
+      .content #info {
+        margin: 0 auto;
+        font-size: 12pt;
+      }
+      .content #info table {
+        margin: 10px auto;
+      }
+      .content #info table th {
+        text-align: right;
+        padding-right: 20px;
+      }
+      .content #info table td {
+        text-align: left;
+      }
+    </style>
+  </body>
+</html>

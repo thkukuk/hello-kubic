@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kubic
+spec:
+  type: LoadBalancer
+  # loadBalancerIP: 192.168.111.40
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: hello-kubic
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kubernetes
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-kubernetes
+  template:
+    metadata:
+      labels:
+        app: hello-kubernetes
+    spec:
+      containers:
+      - name: hello-kubernetes
+        image: registry.opensuse.org/home/kukuk/container/container/kubic/hello-kubic:latest
+        ports:
+        - containerPort: 8080
+       	env:
+        # - name: MESSAGE
+        #   value: I haven't specified a message yet
+	- name: NODE_NAME
+          valueFrom:
+	    fieldRef:
+	      fieldPath: spec.nodeName
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: POD_SERVICE_ACCOUNT
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.serviceAccountName
