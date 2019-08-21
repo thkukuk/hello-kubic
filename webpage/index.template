@@ -25,7 +25,7 @@
 	      <td>
 		<table>
 		  <tr>
-		    <th>Pod:</th>
+		    <th>Hostname:</th>
 		    <td>{{.Hostname}}</td>
 		  </tr>
 		  <tr>
