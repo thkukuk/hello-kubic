@@ -36,7 +36,7 @@ help: ## Display this help screen
 release: ## create release package from git
 	git clone https://github.com/thkukuk/hello-kubic
 	mv hello-kubic hello-kubic-$(VERSION)
-	sed -i -e 's|USE_VENDOR =|USE_VENDOR = -mod vendor|g' hello-kubic-$(VERSION)/Makefile
-	make -C hello-kubic-$(VERSION) vendor
-	tar cJf hello-kubic-$(VERSION).tar.xz hello-kubic-$(VERSION)
+	#sed -i -e 's|USE_VENDOR =|USE_VENDOR = -mod vendor|g' hello-kubic-$(VERSION)/Makefile
+	#make -C hello-kubic-$(VERSION) vendor
+	tar --exclude .git -cJf hello-kubic-$(VERSION).tar.xz hello-kubic-$(VERSION)
 	rm -rf hello-kubic-$(VERSION)
