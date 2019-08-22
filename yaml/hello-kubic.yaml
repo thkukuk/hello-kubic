@@ -30,6 +30,7 @@ spec:
         image: registry.opensuse.org/home/kukuk/container/container/kubic/hello-kubic:latest
         ports:
         - containerPort: 8080
+        imagePullPolicy: Always
         env:
         # - name: MESSAGE
         #   value: I haven't specified a message yet
