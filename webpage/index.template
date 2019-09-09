@@ -32,6 +32,12 @@
 		    <th>Node:</th>
 		    <td>{{.Platform}} ({{.Release}})</td>
 		  </tr>
+		  {{if .Arch}}
+		  <tr>
+		    <th>Architecture:</th>
+		    <td>{{.Arch}}</td>
+		  </tr>
+		  {{end}}
 		  <tr>
 		    <th>Time:</th>
 		    <td>{{.Time}}</td>

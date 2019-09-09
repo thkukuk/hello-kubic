@@ -23,6 +23,7 @@ import (
 	"os/exec"
 	"text/template"
 	"time"
+	"strings"
 )
 
 var (
@@ -62,10 +63,11 @@ func main() {
 
 type TemplateArgs struct {
 	Message string
-	Hostname     string
+	Hostname string
 	Platform string
+	Arch string
 	Release string
-	Time     string
+	Time string
 	NodeName string
 	PodName string
 	PodNamespace string
@@ -79,7 +81,7 @@ func getUname(arg string) string {
 	cmd.Stdout = &out
 	err := cmd.Run()
 	if err == nil {
-		return out.String()
+		return strings.TrimSpace(out.String())
 	}
 	return ""
 }
@@ -90,15 +92,16 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Can't get hostname", 500)
 	}
 	indexTemplate.Execute(w, TemplateArgs{
-		Message:  message,
-		Hostname:     hostname,
-		Platform: getUname("-s"),
-		Release: getUname("-r"),
-		Time:     time.Now().Format("15:04:05"),
-		NodeName: os.Getenv("NODE_NAME"),
-		PodName: os.Getenv("POD_NAME"),
-		PodNamespace: os.Getenv("POD_NAMESPACE"),
-		PodIP: os.Getenv("POD_IP"),
+		Message:           message,
+		Hostname:          hostname,
+		Platform:          getUname("-s"),
+		Arch:              getUname("-m"),
+		Release:           getUname("-r"),
+		Time:              time.Now().Format("15:04:05"),
+		NodeName:          os.Getenv("NODE_NAME"),
+		PodName:           os.Getenv("POD_NAME"),
+		PodNamespace:      os.Getenv("POD_NAMESPACE"),
+		PodIP:             os.Getenv("POD_IP"),
 		PodServiceAccount: os.Getenv("POD_SERVICE_ACCOUNT"),
 	})
 }
