@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: hello-kubic
-        image: registry.opensuse.org/home/kukuk/container/container/kubic/hello-kubic:latest
+        image: registry.opensuse.org/kubic/hello-kubic:latest
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
