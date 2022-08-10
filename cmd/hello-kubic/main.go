@@ -46,6 +46,7 @@ func main() {
 	if len(os.Getenv("MESSAGE")) > 0 {
 		message = os.Getenv("MESSAGE")
 	}
+  log.SetOutput(os.Stdout)
 	log.Printf("Hello-Kubic %s started\n", version)
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/openSUSE-Kubic-Logo.png",
