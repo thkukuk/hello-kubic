@@ -1,3 +1,3 @@
 module github.com/thkukuk/hello-kubic
 
-go 1.12
+go 1.16
